@@ -28,20 +28,34 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _initialize() async {
-    _web3App = await Web3App.createInstance(
-      projectId: DartDefines.projectId,
-      logLevel: LogLevel.error,
+    // _web3App = await Web3App.createInstance(
+    //   projectId: DartDefines.projectId,
+    //   logLevel: LogLevel.error,
+    //   metadata: const PairingMetadata(
+    //     name: 'Web3Modal Flutter Example',
+    //     description: 'Web3Modal Flutter Example',
+    //     url: 'https://www.walletconnect.com/',
+    //     icons: ['https://web3modal.com/images/rpc-illustration.png'],
+    //     redirect: Redirect(
+    //       native: 'flutterdapp://',
+    //       universal: 'https://www.walletconnect.com',
+    //     ),
+    //   ),
+    // );
+    final _w3mService = W3MService(
+      projectId: '657cca24a6aebfa977eb5b427b87c634',
       metadata: const PairingMetadata(
         name: 'Web3Modal Flutter Example',
         description: 'Web3Modal Flutter Example',
         url: 'https://www.walletconnect.com/',
-        icons: ['https://web3modal.com/images/rpc-illustration.png'],
+        icons: ['https://walletconnect.com/walletconnect-logo.png'],
         redirect: Redirect(
           native: 'flutterdapp://',
           universal: 'https://www.walletconnect.com',
         ),
       ),
     );
+    await _w3mService.init();
 
     _web3App!.onSessionPing.subscribe(_onSessionPing);
     _web3App!.onSessionEvent.subscribe(_onSessionEvent);
